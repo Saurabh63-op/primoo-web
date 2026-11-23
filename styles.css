@@ -268,7 +268,7 @@ h2{font-size:clamp(26px,3.4vw,40px);line-height:1.2;color:var(--heading);margin-
 .ind h3{font-size:20px;color:var(--heading)}
 .ind p{color:var(--muted)}
 .map-wrap{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
-.map-wrap img{width:100%;max-width:480px;margin:auto;display:block;border-radius:18px;border:1px solid var(--line);box-shadow:var(--shadow)}
+.map-wrap img{width:100%;max-width:520px;margin:auto;display:block;height:auto;background:#fdfef9;border-radius:20px;border:1px solid var(--line);box-shadow:var(--shadow)}
 .cities{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .cities li{padding:9px 14px;background:#fff;border:1px solid var(--line);border-left:4px solid var(--blue);border-radius:6px;font-weight:600;color:var(--navy);font-size:15px}
 .cities li.hq{border-left-color:var(--accent);background:#fff8e8}
