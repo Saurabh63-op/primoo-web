@@ -189,18 +189,6 @@ h2{font-size:clamp(26px,3.4vw,40px);line-height:1.2;color:var(--heading);margin-
   .trust-grid div{border-right:0}
 }
 
-/* Product card hover: image pops out of the card */
-#offer .card{position:relative;transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s}
-#offer .thumb{overflow:visible;position:relative;background:#fff}
-#offer .thumb img{transition:transform .4s cubic-bezier(.2,.8,.2,1),filter .4s;transform-origin:50% 70%;will-change:transform;position:relative;z-index:2}
-#offer .card:hover{transform:translateY(-4px);z-index:5}
-#offer .card:hover .thumb img{transform:translateY(-3px) scale(1.14) rotate(-2.5deg)}
-
-#offer .thumb::after{content:"";position:absolute;left:22%;right:22%;bottom:-4px;height:14px;border-radius:50%;background:rgba(10,35,128,.28);filter:blur(8px);opacity:0;transform:scale(.6);transition:.4s;z-index:1}
-#offer .card:hover .thumb::after{opacity:1;transform:scale(1.1)}
-#offer .card h3{transition:color .3s}
-#offer .card:hover h3{color:var(--navy)}
-@media (hover:none){#offer .card:hover .thumb img{transform:none}#offer .card:hover .thumb::after{opacity:0}}
 
 /* Steps: timeline look */
 .steps{position:relative;gap:34px}
@@ -405,3 +393,16 @@ h1,h2,h3,h4,p,li{overflow-wrap:anywhere}
 .big-stat{flex-wrap:wrap;gap:10px 20px}
 .big-stat span{min-width:0;flex:1 1 140px}
 @media (max-width:380px){h1{font-size:clamp(24px,10vw,34px)}}
+
+/* Product card hover: colour wash + zoom + accent bar */
+#offer .card{position:relative;overflow:hidden;transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s}
+#offer .card:hover{transform:translateY(-6px)}
+#offer .thumb{position:relative;overflow:hidden;isolation:isolate;background:#fff;border-radius:12px}
+#offer .thumb::before{content:"";position:absolute;left:50%;top:60%;width:170%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#c7dbff 0%,#8fb4ff 100%);transform:translate(-50%,-50%) scale(0);transition:transform .6s cubic-bezier(.2,.8,.2,1);z-index:-1}
+#offer .card:hover .thumb::before{transform:translate(-50%,-50%) scale(1)}
+#offer .thumb img{mix-blend-mode:multiply;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+#offer .card:hover .thumb img{transform:scale(1.12)}
+#offer .card::after{content:"";position:absolute;left:0;bottom:0;height:4px;width:0;background:var(--accent);transition:width .5s cubic-bezier(.2,.8,.2,1)}
+#offer .card:hover::after{width:100%}
+#offer .card h3{transition:color .3s}
+#offer .card:hover h3{color:var(--navy)}
