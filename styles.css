@@ -172,7 +172,7 @@ h2{font-size:clamp(26px,3.4vw,40px);line-height:1.2;color:var(--heading);margin-
   .trust-grid div{border-bottom:1px solid rgba(255,255,255,.12)}
 }
 @media (max-width:980px){.foot-grid{grid-template-columns:1fr 1fr}}
-@media (max-width:560px){.foot-grid{grid-template-columns:1fr;gap:30px;padding:44px 0 30px}.foot-bar-in{flex-direction:column;text-align:center}}
+@media (max-width:560px){.foot-bar-in{flex-direction:column;text-align:center}}
 @media (max-width:760px){
   .burger{display:flex}
   .menu{position:absolute;top:76px;left:0;right:0;background:#fff;flex-direction:column;align-items:flex-start;padding:20px;gap:16px;border-bottom:1px solid var(--line);display:none}
@@ -335,3 +335,18 @@ a.card{display:block;color:inherit;cursor:pointer}
 .cat-foot{margin-top:24px;text-align:center}
 @keyframes catfade{from{opacity:0}to{opacity:1}}
 @keyframes catpop{from{transform:translateY(20px) scale(.97)}to{transform:none}}
+
+/* Footer: mobile layout */
+@media (max-width:560px){
+  .foot-grid{grid-template-columns:1fr 1fr;gap:30px 18px;padding:36px 0 26px}
+  .foot-brand{grid-column:1/-1;text-align:center;padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,.12)}
+  .foot-brand p{max-width:none;margin-inline:auto}
+  .site-footer .logo img{height:54px}
+  .foot-col:nth-child(4){grid-column:1/-1;background:rgba(255,255,255,.05);border-radius:14px;padding:20px}
+  .foot-col h4{font-size:15px;margin-bottom:14px}
+  .foot-col ul{gap:9px}
+  .foot-col a{font-size:14px}
+  .contact{grid-template-columns:1fr 1fr;gap:16px 14px}
+  .contact li:nth-child(3){grid-column:1/-1}
+  .foot-bar-in{padding:16px 0;gap:6px}
+}
