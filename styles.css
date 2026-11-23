@@ -187,7 +187,6 @@ h2{font-size:clamp(26px,3.4vw,40px);line-height:1.2;color:var(--heading);margin-
   .pill{font-size:13px;padding:6px 14px}
   .cards-4,.cards-3,.steps,.stats-grid,.trust-grid{grid-template-columns:1fr}
   .trust-grid div{border-right:0}
-  .hero-actions .btn{width:100%;text-align:center}
 }
 
 /* Product card hover: image pops out of the card */
@@ -373,6 +372,36 @@ a.card{display:block;color:inherit;cursor:pointer}
   .stats-grid>div{padding:20px 10px;border-bottom:1px solid rgba(255,255,255,.18)}
   .stats-grid>div:nth-child(odd){border-right:1px solid rgba(255,255,255,.18)}
   .stats-grid>div:nth-last-child(-n+2){border-bottom:0}
-  .stats-grid strong{font-size:30px;line-height:1.1;margin-bottom:6px;white-space:nowrap}
+  .stats-grid strong{font-size:clamp(20px,8vw,30px);line-height:1.1;margin-bottom:6px;white-space:nowrap}
   .stats-grid span{font-size:13px;line-height:1.4;display:block}
 }
+
+/* Hero: compact mobile layout */
+@media (max-width:760px){
+  .hero{padding:24px 0 36px}
+  .hero-text h1{margin-bottom:14px}
+  .hero-text p{font-size:15px;line-height:1.6}
+  .hero-actions{flex-wrap:nowrap;gap:10px;margin-top:20px}
+  .hero-actions .btn{flex:1 1 0;width:auto;display:flex;align-items:center;justify-content:center;text-align:center;padding:12px 10px;min-height:54px;font-size:14px;line-height:1.25}
+  .hero-visual{margin-top:34px}
+}
+
+/* Very narrow screens: never overflow sideways */
+h1,h2,h3,h4,p,li{overflow-wrap:anywhere}
+.btn{max-width:100%}
+@media (max-width:980px){
+  .two-col,.map-wrap,.office,.prod{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:640px){
+  .ind{grid-template-columns:44px minmax(0,1fr)}
+  .cities{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hero-actions .btn,.cta .btn{white-space:normal;text-align:center}
+}
+@media (max-width:380px){
+  .container{width:calc(100% - 28px)}
+  .hero-actions{flex-wrap:wrap}
+  .hero-actions .btn{flex:1 1 100%}
+}
+.big-stat{flex-wrap:wrap;gap:10px 20px}
+.big-stat span{min-width:0;flex:1 1 140px}
+@media (max-width:380px){h1{font-size:clamp(24px,10vw,34px)}}
