@@ -611,3 +611,94 @@ html,body{overflow-x:clip}
 }
 @media (max-width:760px){.parallax{padding:96px 0}}
 @media (prefers-reduced-motion:reduce){.parallax::before{animation:none!important}}
+
+/* ===== Home: five product cards, larger, in an endless loop ===== */
+.loop{overflow:clip;padding:14px 0 22px;margin:0 -20px}
+.loop-track{display:flex;width:max-content;animation:cardloop 48s linear infinite}
+.loop:hover .loop-track,.loop:focus-within .loop-track{animation-play-state:paused}
+.loop-set{display:flex;gap:26px;padding-right:26px}
+.loop .card{flex:0 0 clamp(270px,26vw,360px);padding:26px 22px 22px;animation:none!important}
+#offer .loop .card h3{font-size:21px;margin-bottom:8px}
+#offer .loop .card p{font-size:15px;line-height:1.55}
+.loop .thumb{aspect-ratio:4/3;margin:-4px -4px 16px}
+@keyframes cardloop{to{transform:translateX(-50%)}}
+@media (max-width:760px){.loop-set{gap:16px;padding-right:16px}.loop .card{flex-basis:min(78vw,300px)}.loop-track{animation-duration:40s}}
+@media (prefers-reduced-motion:reduce){.loop{overflow-x:auto}.loop-track{animation:none}.loop-set[aria-hidden]{display:none}}
+
+/* ===== Home cards: swipe slider (scroll-snap, no auto movement) ===== */
+.loop{overflow-x:auto;overflow-y:hidden;margin:0 -20px;padding:14px 20px 26px;scroll-snap-type:x mandatory;scroll-padding:0 20px;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:var(--accent) #e3ebfb}
+.loop::-webkit-scrollbar{height:8px}
+.loop::-webkit-scrollbar-track{background:#e3ebfb;border-radius:8px}
+.loop::-webkit-scrollbar-thumb{background:var(--accent);border-radius:8px}
+.loop-track{animation:none!important;transform:none!important}
+.loop-set[aria-hidden]{display:none}
+.loop-set{padding-right:0}
+.loop .card{scroll-snap-align:start}
+
+/* ===== Slider arrows (scrollbar hidden) ===== */
+.slider{position:relative}
+.loop{scrollbar-width:none}
+.loop::-webkit-scrollbar{display:none}
+.sl-btn{position:absolute;top:42%;z-index:3;width:48px;height:48px;border-radius:50%;border:0;background:var(--accent);color:#fff;font:600 22px/1 'Poppins',sans-serif;cursor:pointer;box-shadow:0 8px 20px rgba(10,35,128,.25);transition:transform .25s,background .25s;display:grid;place-items:center}
+.sl-btn:hover{background:var(--accent-d);transform:scale(1.08)}
+.sl-btn:focus-visible{outline:3px solid var(--navy);outline-offset:2px}
+.sl-prev{left:-6px}.sl-next{right:-6px}
+@media (max-width:760px){.sl-btn{width:40px;height:40px;font-size:18px}.sl-prev{left:2px}.sl-next{right:2px}}
+.sl-btn{top:130px}
+@media (max-width:760px){.sl-btn{top:100px}}
+
+/* ===== Slider: whole cards only (3 / 2 / 1), no cut-off edge ===== */
+.loop{margin:0;padding:14px 6px 26px;scroll-padding:0 6px}
+.loop-track{width:100%}
+.loop-set{width:100%;padding-right:0}
+.loop .card{flex:0 0 calc((100% - 2 * var(--gap)) / 3)}
+@media (max-width:1100px){.loop .card{flex-basis:calc((100% - var(--gap)) / 2)}}
+@media (max-width:760px){.loop .card{flex-basis:calc(100% - 44px)}.loop{padding-left:2px;padding-right:2px}}
+.loop{--gap:26px}
+.loop-set{gap:var(--gap)}
+@media (max-width:760px){.loop{--gap:16px}}
+
+/* ===== Slider arrows: sit in the gutters, level with the card images ===== */
+.sl-btn{top:320px}
+.sl-prev{left:-24px}.sl-next{right:-24px}
+@media (min-width:1300px){.sl-prev{left:-58px}.sl-next{right:-58px}}
+@media (max-width:1100px){.sl-btn{top:200px}}
+@media (max-width:760px){.sl-btn{top:118px;width:38px;height:38px}.sl-prev{left:-14px}.sl-next{right:-14px}}
+
+/* ===== Smaller slider cards: 4 per row on desktop ===== */
+.loop{--gap:22px}
+.loop .card{flex-basis:calc((100% - 3 * var(--gap)) / 4);padding:20px 16px 18px}
+@media (max-width:1100px){.loop .card{flex-basis:calc((100% - 2 * var(--gap)) / 3)}}
+@media (max-width:860px){.loop .card{flex-basis:calc((100% - var(--gap)) / 2)}}
+@media (max-width:760px){.loop{--gap:16px}.loop .card{flex-basis:calc(100% - 64px)}}
+.loop .thumb{aspect-ratio:16/10;margin:-2px -2px 12px}
+#offer .loop .card h3{font-size:18px;margin-bottom:6px}
+#offer .loop .card p{font-size:14px;line-height:1.5}
+.sl-btn{top:84px;width:44px;height:44px}
+@media (max-width:1100px){.sl-btn{top:84px}}
+@media (max-width:760px){.sl-btn{top:84px;width:38px;height:38px}}
+.sl-btn{top:95px}
+@media (max-width:1100px){.sl-btn{top:95px}}
+@media (max-width:760px){.sl-btn{top:90px}}
+
+/* ===== Arrows: vertically centred on the cards ===== */
+.sl-btn,.sl-btn:hover{top:calc(50% - 6px)!important}
+.sl-btn{transform:translateY(-50%)}
+.sl-btn:hover{transform:translateY(-50%) scale(1.08)}
+
+/* ===== Mobile slider: full-width track, arrows level with the image ===== */
+@media (max-width:760px){
+  .loop{margin:0 -20px;padding:14px 20px 26px;scroll-padding:0 20px}
+  .loop .card{flex-basis:calc(100% - 28px)}
+  .sl-btn,.sl-btn:hover{top:130px!important;width:36px;height:36px;font-size:17px}
+  .sl-prev{left:6px}.sl-next{right:6px}
+}
+
+/* Mobile: no arrows, swipe + auto-slide only */
+@media (max-width:760px){.sl-btn{display:none!important}}
+
+/* Mobile: exactly one card visible, no peek of the next one */
+@media (max-width:760px){
+  .loop{margin:0;padding:14px 6px 26px;scroll-padding:0 6px}
+  .loop .card{flex-basis:100%}
+}

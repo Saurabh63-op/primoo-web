@@ -61,7 +61,11 @@
     <div class="section-head">
       <h2>Everything a business needs to bill, print and label</h2>
     </div>
-    <div class="cards cards-5">
+    <div class="slider">
+<button class="sl-btn sl-prev" type="button" aria-label="Previous product">&#8592;</button>
+<button class="sl-btn sl-next" type="button" aria-label="Next product">&#8594;</button>
+<div class="loop"><div class="loop-track">
+<div class="loop-set">
       <a class="card" href="products.html#rolls">
         <div class="thumb"><img src="images/pos.jpg" alt="POS thermal paper rolls and receipt" loading="lazy"></div>
         <h3>POS Thermal Paper Roll</h3>
@@ -83,6 +87,30 @@
         <h3>Thermal Transfer Overprint</h3>
         <p>Thermal transfer overprint for coding straight onto pouches, cartons and flexible packaging.</p><span class="more">View details <b>→</b></span></a>
     </div>
+<div class="loop-set" aria-hidden="true">
+      <a class="card" tabindex="-1" href="products.html#rolls">
+        <div class="thumb"><img src="images/pos.jpg" alt=""></div>
+        <h3>POS Thermal Paper Roll</h3>
+        <p>Thermal paper rolls, plain or in colour, that keep registers running without jams.</p><span class="more">View details <b>→</b></span></a>
+      <a class="card" tabindex="-1" href="products.html#labels">
+        <div class="thumb"><img src="images/labels.jpg" alt=""></div>
+        <h3>Labels</h3>
+        <p>Paper, synthetic and custom labels and tags, made by established global manufacturers and sized for whatever your printer needs.</p><span class="more">View details <b>→</b></span></a>
+      <a class="card" tabindex="-1" href="products.html#ttr">
+        <div class="thumb"><img src="images/ttr.jpg" alt=""></div>
+        <h3>Thermal Transfer Ribbons</h3>
+        <p>Wax, wax/resin and resin thermal transfer ribbons that hold up under heat, chemicals and handling.</p><span class="more">View details <b>→</b></span></a>
+      <a class="card" tabindex="-1" href="products.html#wash">
+        <div class="thumb"><img src="images/prod-wash.jpg" alt=""></div>
+        <h3>Wash Care Ribbons</h3>
+        <p>Ribbons built for garment wash-care labels and tags that survive washing, heat and fading.</p><span class="more">View details <b>→</b></span></a>
+      <a class="card" tabindex="-1" href="products.html#tto">
+        <div class="thumb"><img src="images/tto.jpg" alt=""></div>
+        <h3>Thermal Transfer Overprint</h3>
+        <p>Thermal transfer overprint for coding straight onto pouches, cartons and flexible packaging.</p><span class="more">View details <b>→</b></span></a>
+    </div>
+</div></div>
+</div>
   </div>
 </section>
 
@@ -257,5 +285,19 @@
   </div>
 </footer>
 
+<script>
+(function(){var s=document.querySelector(".slider");if(!s)return;var l=s.querySelector(".loop"),c=l.querySelector(".card"),t,paused=false;
+function step(){return c.getBoundingClientRect().width+parseFloat(getComputedStyle(c.parentNode).columnGap||16)}
+function go(d){var end=l.scrollWidth-l.clientWidth-4;if(d>0&&l.scrollLeft>=end)l.scrollTo({left:0,behavior:"smooth"});else if(d<0&&l.scrollLeft<=4)l.scrollTo({left:end+4,behavior:"smooth"});else l.scrollBy({left:d*step(),behavior:"smooth"})}
+function start(){stop();if(matchMedia("(prefers-reduced-motion:reduce)").matches)return;t=setInterval(function(){if(!paused&&!document.hidden)go(1)},3500)}
+function stop(){clearInterval(t)}
+s.querySelector(".sl-prev").onclick=function(){go(-1);start()};
+s.querySelector(".sl-next").onclick=function(){go(1);start()};
+s.addEventListener("mouseenter",function(){paused=true});s.addEventListener("mouseleave",function(){paused=false});
+s.addEventListener("focusin",function(){paused=true});s.addEventListener("focusout",function(){paused=false});
+s.addEventListener("touchstart",function(){paused=true},{passive:true});s.addEventListener("touchend",function(){setTimeout(function(){paused=false},4000)},{passive:true});
+start();
+})();
+</script>
 </body>
 </html>
