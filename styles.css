@@ -46,7 +46,7 @@ ul{list-style:none}
 .menu{display:flex;align-items:center;gap:28px;font-weight:500;font-size:15px}
 .menu a:not(.btn){position:relative;color:var(--navy)}
 .menu a:not(.btn)::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--accent);transition:.25s}
-.menu a:not(.btn):hover::after,.menu a.active::after{width:100%}
+.menu a:not(.btn):hover::after,.menu a.active:not(.btn)::after{width:100%}
 .menu-toggle{display:none}
 .burger{display:none;cursor:pointer;flex-direction:column;gap:5px}
 .burger span{width:24px;height:2px;background:var(--navy);transition:.25s}
@@ -210,7 +210,7 @@ h2{font-size:clamp(26px,3.4vw,40px);line-height:1.2;color:var(--heading);margin-
 .crumbs a:hover{color:var(--accent)}
 .page-hero h1{color:#fff;font-size:clamp(34px,5vw,52px);margin-bottom:12px}
 .page-hero p{max-width:640px;font-size:17px;opacity:.92}
-.menu a.active::after{width:100%}
+.menu a.active:not(.btn)::after{width:100%}
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:start}
 .prose p{margin-bottom:16px;color:var(--muted);font-size:17px}
 .prose p strong{color:var(--navy)}
@@ -462,4 +462,115 @@ h1,h2,h3,h4,p,li{overflow-wrap:anywhere}
 .cta .btn-ghost:hover{background:rgba(255,255,255,.1);color:#fff;border-color:#fff;box-shadow:none}
 @media (max-width:760px){
   .hero-actions .btn,.cta .btn{justify-content:space-between;text-align:left;padding:10px 10px 10px 16px}
+}
+
+/* Home: five product cards */
+.cards-5{grid-template-columns:repeat(5,1fr);gap:18px}
+#offer .cards-5 .card{padding:22px 16px 18px}
+#offer .cards-5 .card h3{font-size:17px}
+#offer .cards-5 .card p{font-size:13.5px}
+@media (max-width:1100px){.cards-5{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:760px){.cards-5{grid-template-columns:repeat(2,1fr);gap:14px}}
+@media (max-width:560px){.cards-5{grid-template-columns:1fr}}
+
+/* Parallax scroll (CSS only, scroll-driven animations) */
+.parallax{position:relative;overflow:hidden;overflow:clip;background:var(--navy);color:#fff;padding:110px 0;text-align:center}
+.px{position:absolute;pointer-events:none}
+.px-ring{border-radius:50%;border:2px solid rgba(255,255,255,.2)}
+.px.r1{width:440px;height:440px;left:-140px;top:-170px}
+.px.r2{width:320px;height:320px;right:-90px;bottom:-150px;border-color:rgba(245,163,15,.55)}
+.px-dot{border-radius:50%;background:var(--accent)}
+.px.d1{width:14px;height:14px;left:16%;top:30%}
+.px.d2{width:24px;height:24px;right:20%;top:22%;opacity:.85}
+.px.d3{width:10px;height:10px;left:68%;bottom:24%}
+.px-text{position:relative;z-index:1}
+.px-text h2{color:#fff;font-size:clamp(32px,5.4vw,62px);line-height:1.12;margin:0}
+.px-text h2 em{font-style:normal;color:var(--accent)}
+@keyframes pxmove{from{transform:translateY(var(--from,60px))}to{transform:translateY(var(--to,-60px))}}
+@keyframes pxtext{from{transform:translateY(40px);opacity:.2}35%{opacity:1}to{transform:translateY(-30px)}}
+@keyframes pxhero{from{transform:translateY(0)}to{transform:translateY(55px)}}
+@supports (animation-timeline:view()){
+  .px{animation:pxmove linear both;animation-timeline:view()}
+  .px.r1{--from:90px;--to:-90px}
+  .px.r2{--from:-80px;--to:80px}
+  .px.d1{--from:130px;--to:-130px}
+  .px.d2{--from:-110px;--to:110px}
+  .px.d3{--from:150px;--to:-150px}
+  .px-text{animation:pxtext linear both;animation-timeline:view()}
+  .hero-visual img{animation:pxhero linear both;animation-timeline:scroll(root block);animation-range:0 600px}
+}
+@media (prefers-reduced-motion:reduce){.px,.px-text,.hero-visual img{animation:none!important}}
+@media (max-width:760px){.parallax{padding:72px 0}.px.r1{width:300px;height:300px}.px.r2{width:220px;height:220px}}
+
+/* ===== Scroll reveal: text and images slide in from the sides (CSS only) ===== */
+html,body{overflow-x:clip}
+@keyframes fromleft{from{opacity:0;transform:translateX(calc(var(--slide,90px) * -1))}to{opacity:1;transform:none}}
+@keyframes fromright{from{opacity:0;transform:translateX(var(--slide,90px))}to{opacity:1;transform:none}}
+@keyframes fromup{from{opacity:0;transform:translateY(50px)}to{opacity:1;transform:none}}
+
+/* hero: plays once on page load */
+.hero-text{animation:fromleft .9s cubic-bezier(.2,.8,.2,1) both}
+.hero-visual{animation:fromright .9s .15s cubic-bezier(.2,.8,.2,1) both}
+
+@supports (animation-timeline:view()){
+  .section-head,.sec-title,.ind,.map-wrap img,.big-stat,.quote,
+  .split>div:first-child,.two-col>*:nth-child(1),.box:nth-child(1),.prod .prod-img,
+  #offer .cards-5 .card:nth-child(odd),.cards-3 .feature:nth-child(3n+1),.tile:nth-child(odd),.c-card:nth-child(odd),
+  .steps .step:nth-child(3n+1),.pillar:nth-child(3n+1){
+    animation:fromleft linear backwards;animation-timeline:view();animation-range:entry 0% entry 65%}
+  .split>.lead,.two-col>*:nth-child(2),.box:nth-child(2),.prod>div:not(.prod-img),.map-wrap>div,
+  #offer .cards-5 .card:nth-child(even),.cards-3 .feature:nth-child(3n),.tile:nth-child(even),.c-card:nth-child(even),
+  .steps .step:nth-child(3n),.pillar:nth-child(3n){
+    animation:fromright linear backwards;animation-timeline:view();animation-range:entry 0% entry 65%}
+  .cards-3 .feature:nth-child(3n+2),.steps .step:nth-child(3n+2),.pillar:nth-child(3n+2),.stats-grid>div,.closing,.cta .container,.cat-foot{
+    animation:fromup linear backwards;animation-timeline:view();animation-range:entry 0% entry 60%}
+  .prod:nth-of-type(even) .prod-img{animation-name:fromright}
+  .prod:nth-of-type(even)>div:not(.prod-img){animation-name:fromleft}
+}
+@media (max-width:760px){:root{--slide:40px}}
+@media (prefers-reduced-motion:reduce){
+  .hero-text,.hero-visual{animation:none}
+  .section-head,.sec-title,.ind,.map-wrap img,.big-stat,.quote,.split>div,.two-col>*,.box,.prod .prod-img,.prod>div,
+  .card,.feature,.tile,.c-card,.step,.pillar,.stats-grid>div,.closing,.cta .container,.map-wrap>div{animation:none!important}
+}
+
+/* ===== Hero animations ===== */
+.hero-text{animation:none}
+.hero-text>*{animation:fromleft .8s cubic-bezier(.2,.8,.2,1) both}
+.hero-text>h1{animation-delay:.05s}
+.hero-text>p{animation-delay:.25s}
+.hero-text>.hero-actions{animation-name:fromup;animation-delay:.45s}
+.hero-text h1 em{background:linear-gradient(90deg,#f5a30f 0%,#ffd98a 45%,#f5a30f 90%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:shine 4.5s linear infinite}
+@keyframes shine{from{background-position:120% 0}to{background-position:-100% 0}}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-12px) rotate(2deg)}}
+@keyframes ringpulse{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(1.14);opacity:.5}}
+@keyframes blobmorph{0%,100%{border-radius:200px 28px 28px 28px}50%{border-radius:150px 70px 40px 100px}}
+@keyframes callring{0%{box-shadow:0 0 0 0 rgba(245,163,15,.55)}70%,100%{box-shadow:0 0 0 16px rgba(245,163,15,0)}}
+.badge{animation:bob 4s ease-in-out infinite}
+.hero-visual::after{animation:ringpulse 3.6s ease-in-out infinite}
+.hero-visual::before{animation:blobmorph 7s ease-in-out infinite}
+.hero-actions .btn:first-child{position:relative;animation:callring 2.4s 1.4s infinite}
+.hero-actions .btn:first-child:hover{animation:none}
+@media (prefers-reduced-motion:reduce){
+  .hero-text>*,.hero-text h1 em,.badge,.hero-visual::after,.hero-visual::before,.hero-actions .btn:first-child{animation:none!important}
+  .hero-text h1 em{-webkit-text-fill-color:var(--accent);color:var(--accent);background:none}
+}
+
+/* ===== Heading animations: text wipes in, amber underline draws ===== */
+@keyframes hwipe{from{clip-path:inset(-8px 100% -8px -8px)}to{clip-path:inset(-8px -8px -8px -8px)}}
+@keyframes bargrow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.section-head h2::after,.split h2::after{content:"";display:block;width:64px;height:4px;border-radius:2px;background:var(--accent);margin:14px auto 0;transform-origin:center}
+.split h2::after{margin-left:0;transform-origin:left}
+.sec-title::after{transform-origin:left}
+.page-hero h1{animation:hwipe 1s cubic-bezier(.2,.8,.2,1) both}
+.page-hero h1::after{content:"";display:block;width:64px;height:4px;border-radius:2px;background:var(--accent);margin-top:14px;transform-origin:left;animation:bargrow .8s .6s cubic-bezier(.2,.8,.2,1) both}
+@supports (animation-timeline:view()){
+  .section-head h2,.sec-title h2,.split h2,.prod h2,.cta h2,.px-text h2{
+    animation:hwipe linear backwards;animation-timeline:view();animation-range:entry 5% entry 70%}
+  .section-head h2::after,.split h2::after,.sec-title::after{
+    animation:bargrow linear backwards;animation-timeline:view();animation-range:entry 30% entry 95%}
+}
+@media (prefers-reduced-motion:reduce){
+  .section-head h2,.sec-title h2,.split h2,.prod h2,.cta h2,.px-text h2,.page-hero h1,.page-hero h1::after,
+  .section-head h2::after,.split h2::after,.sec-title::after{animation:none!important}
 }
