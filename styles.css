@@ -577,20 +577,13 @@ html,body{overflow-x:clip}
 .hero-text{max-width:600px}
 @keyframes herozoom{from{transform:scale(1.07)}to{transform:scale(1)}}
 @media (max-width:760px){
-  .hero{align-items:flex-start;min-height:640px}
-  .hero::before{inset:auto 0 0 0;height:50%;background-position:86% center;background-size:cover}
-  .hero::after{background:linear-gradient(180deg,#fff 0%,rgba(255,255,255,.96) 46%,rgba(255,255,255,0) 62%)}
-  .hero-grid{padding-block:32px 24px}
-}
-@media (prefers-reduced-motion:reduce){.hero::before{animation:none}}
-
-/* Hero: stacked layout (text on top, photo below) on phones and small tablets */
-@media (max-width:1100px){
-  .hero{display:block;min-height:0;padding-bottom:clamp(210px,52vw,380px)}
-  .hero::before{inset:auto 0 0 0;height:clamp(210px,52vw,380px);background-position:86% center;background-size:cover}
-  .hero::after{background:linear-gradient(180deg,#fff 0%,rgba(255,255,255,.97) 55%,rgba(255,255,255,0) 100%);inset:0 0 auto 0;height:calc(100% - clamp(150px,38vw,300px));z-index:-1}
+  /* phones: same idea as desktop — photo sits behind the text, fading in toward the bottom */
+  .hero{display:block;align-items:flex-start;min-height:0;padding-bottom:clamp(120px,34vw,220px)}
+  .hero::before{inset:0;height:auto;background-position:80% bottom;background-size:cover}
+  .hero::after{inset:0;height:auto;background:linear-gradient(180deg,rgba(255,255,255,.96) 0%,rgba(255,255,255,.9) 50%,rgba(255,255,255,.35) 82%,rgba(255,255,255,0) 100%)}
   .hero-grid{padding-block:32px 28px}
 }
+@media (prefers-reduced-motion:reduce){.hero::before{animation:none}}
 
 /* ===== Products page: photo behind the page title ===== */
 .page-hero.photo{background:linear-gradient(90deg,rgba(10,35,128,.97) 0%,rgba(10,35,128,.9) 38%,rgba(10,35,128,.35) 72%,rgba(10,35,128,.05) 100%),url(images/products-hero.jpg) 70% 70%/cover no-repeat;padding:84px 0 78px}
@@ -696,6 +689,14 @@ html,body{overflow-x:clip}
 
 /* Mobile: no arrows, swipe + auto-slide only */
 @media (max-width:760px){.sl-btn{display:none!important}}
+
+/* Mobile: dots under the cards show there is more to swipe */
+.sl-dots{display:none}
+@media (max-width:760px){
+  .sl-dots{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:-6px;padding-bottom:6px}
+  .sl-dot{width:9px;height:9px;padding:0;border:0;border-radius:50%;background:#c6d2ee;cursor:pointer;transition:width .25s,background .25s}
+  .sl-dot.on{width:26px;border-radius:9px;background:var(--accent)}
+}
 
 /* Mobile: exactly one card visible, no peek of the next one */
 @media (max-width:760px){

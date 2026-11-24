@@ -296,6 +296,14 @@ s.querySelector(".sl-next").onclick=function(){go(1);start()};
 s.addEventListener("mouseenter",function(){paused=true});s.addEventListener("mouseleave",function(){paused=false});
 s.addEventListener("focusin",function(){paused=true});s.addEventListener("focusout",function(){paused=false});
 s.addEventListener("touchstart",function(){paused=true},{passive:true});s.addEventListener("touchend",function(){setTimeout(function(){paused=false},4000)},{passive:true});
+/* pagination dots (shown on phones only, via CSS) */
+var cards=l.querySelectorAll(".loop-set:not([aria-hidden]) .card"),dots=document.createElement("div"),ds=[];
+dots.className="sl-dots";dots.setAttribute("aria-hidden","true");
+for(var i=0;i<cards.length;i++){(function(i){var b=document.createElement("button");b.type="button";b.className="sl-dot";b.tabIndex=-1;
+b.onclick=function(){l.scrollTo({left:cards[i].offsetLeft-cards[0].offsetLeft,behavior:"smooth"});start()};dots.appendChild(b);ds.push(b)})(i)}
+s.appendChild(dots);
+function mark(){var k=Math.round(l.scrollLeft/(step()||1));k=Math.max(0,Math.min(ds.length-1,k));for(var i=0;i<ds.length;i++)ds[i].classList.toggle("on",i===k)}
+l.addEventListener("scroll",mark,{passive:true});window.addEventListener("resize",mark);mark();
 start();
 })();
 </script>
