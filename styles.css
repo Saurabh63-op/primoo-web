@@ -298,25 +298,6 @@ a.card{display:block;color:inherit;cursor:pointer}
 .card .more{display:inline-flex;gap:6px;margin-top:12px;font-family:'Poppins',sans-serif;font-weight:600;font-size:14px;color:var(--accent-d)}
 .card .more b{transition:transform .25s}
 .card:hover .more b{transform:translateX(5px)}
-.cat-modal{display:none;position:fixed;inset:0;z-index:100;align-items:center;justify-content:center;padding:20px}
-.cat-modal:target{display:flex;animation:catfade .25s}
-.cat-bg{position:absolute;inset:0;background:rgba(6,18,60,.7)}
-.cat-box{position:relative;background:#fff;border-radius:18px;width:100%;max-width:980px;max-height:90vh;overflow:auto;padding:34px;border-top:6px solid var(--accent);animation:catpop .3s}
-.cat-box h2{font-size:clamp(24px,3vw,32px);margin-bottom:6px}
-.cat-intro{color:var(--muted);margin-bottom:22px;max-width:640px}
-.cat-x{position:absolute;right:14px;top:10px;width:38px;height:38px;border-radius:50%;background:var(--alt);color:var(--navy);font-size:26px;line-height:36px;text-align:center}
-.cat-x:hover{background:var(--accent)}
-.cat-grid{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
-.cat-grid.n1{max-width:420px}
-.cat-item{display:block;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff;transition:.25s}
-.cat-item:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--blue)}
-.cat-item img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover}
-.cat-item h3{font-size:18px;padding:14px 16px 4px;color:var(--heading)}
-.cat-item p{padding:0 16px;color:var(--muted);font-size:14px;margin-bottom:10px}
-.cat-item .tags{padding:0 16px 16px}
-.cat-foot{margin-top:24px;text-align:center}
-@keyframes catfade{from{opacity:0}to{opacity:1}}
-@keyframes catpop{from{transform:translateY(20px) scale(.97)}to{transform:none}}
 
 /* Footer: mobile layout */
 @media (max-width:760px){
@@ -573,4 +554,12 @@ html,body{overflow-x:clip}
 @media (prefers-reduced-motion:reduce){
   .section-head h2,.sec-title h2,.split h2,.prod h2,.cta h2,.px-text h2,.page-hero h1,.page-hero h1::after,
   .section-head h2::after,.split h2::after,.sec-title::after{animation:none!important}
+}
+
+/* Buttons: no arrow chip */
+.btn::after,.btn-sm::after,.cta .btn-ghost::after,.btn-outline::after{display:none!important;content:none!important}
+.btn{padding:13px 28px;gap:0;justify-content:center;text-align:center}
+.btn-sm{padding:9px 20px}
+@media (max-width:760px){
+  .hero-actions .btn,.cta .btn{justify-content:center;text-align:center;padding:12px 16px}
 }
